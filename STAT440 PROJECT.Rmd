@@ -18,6 +18,9 @@ library(lubridate)
 path <- "/Users/jason/Documents/GitHub/STAT440/weatherAUS.csv"
 df <- read.csv(path)
 df
+df_tempx <- df %>% 
+  filter(month(as.Date(Date)) == 6 & year(as.Date(Date)) == 2016)
+df_tempx
 ```
 
 
@@ -38,8 +41,14 @@ df_temp_summer
 df_Albury_2016 <- df_temp_winter %>% filter(Location == "Albury" & year(as.Date(Date)) == 2016)
 df_Albury_2016
 
+# WaggaWagga 2016 Winter Data
+df_WaggaWagga_2016 <- df_temp_winter %>% filter(Location == "WaggaWagga" & year(as.Date(Date)) == 2016)
+df_WaggaWagga_2016
+
 # Correlation
 cor(df_Albury_2016$MinTemp, df_Albury_2016$MaxTemp)
+cor(df_Albury_2016$MaxTemp, df_WaggaWagga_2016$MaxTemp)
+
 ```
 
 
@@ -55,7 +64,7 @@ cor(temp_9_3_winter$Temp9am, temp_9_3_winter$Temp3pm, method = "spearman")
 lmmm <- lm(Temp3pm ~ Temp9am, data = temp_9_3_winter)
 summary(lmmm)$r.squared 
 
-write.csv(df_temp_winter,"/Users/jason/Documents/GitHub/STAT440/df_temp_winter.csv", row.names = FALSE)
+write.csv(df_temp_summer,"/Users/jason/Documents/GitHub/STAT440/df_temp_summer.csv", row.names = FALSE)
 ```
 
 
