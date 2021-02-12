@@ -17,10 +17,10 @@ library(lubridate)
 ```{r}
 path <- "/Users/jason/Documents/GitHub/STAT440/weatherAUS.csv"
 df <- read.csv(path)
-df
-df_tempx <- df %>% 
-  filter(month(as.Date(Date)) == 6 & year(as.Date(Date)) == 2016)
-df_tempx
+# df
+# df_tempx <- df %>% 
+#   filter(month(as.Date(Date)) == 6 & year(as.Date(Date)) == 2016)
+# df_tempx
 ```
 
 
@@ -30,12 +30,12 @@ df_temp <- df %>% select(c(1:4))
 # Winter Data
 df_temp_winter <- df_temp %>% 
   filter(month(as.Date(Date)) >= 6 & month(as.Date(Date)) <= 8)
-df_temp_winter
+# df_temp_winter
 
 # Summer Data
 df_temp_summer <- df_temp %>% 
   filter(month(as.Date(Date)) == 12 | month(as.Date(Date)) <= 2)
-df_temp_summer
+# df_temp_summer
 
 # Albury 2016 Winter Data
 df_Albury_2016 <- df_temp_winter %>% filter(Location == "Albury" & year(as.Date(Date)) == 2016)
@@ -46,25 +46,30 @@ df_WaggaWagga_2016 <- df_temp_winter %>% filter(Location == "WaggaWagga" & year(
 df_WaggaWagga_2016
 
 # Correlation
+# Correlation between Albury min temp and max temp
 cor(df_Albury_2016$MinTemp, df_Albury_2016$MaxTemp)
-cor(df_Albury_2016$MaxTemp, df_WaggaWagga_2016$MaxTemp)
 
+# Correlation between min temp in Albury and in WaggaWagga
+cor(df_Albury_2016$MinTemp, df_WaggaWagga_2016$MinTemp)
+
+# Correlation between min temp in Albury and in WaggaWagga
+cor(df_Albury_2016$MaxTemp, df_WaggaWagga_2016$MaxTemp)
 ```
 
 
 
 ```{r}
 ###########
-df_temp_9_3 <- df %>% select(c(1:2,20:21))
-df_temp_9_3_winter <- df_temp_9_3 %>% 
-  filter(month(as.Date(Date)) >= 6 & month(as.Date(Date)) <= 8)
-temp_9_3_winter <- df_temp_9_3_winter %>% filter(Location == "Albury" & year(as.Date(Date)) == 2016)
-cor(temp_9_3_winter$Temp9am, temp_9_3_winter$Temp3pm, method = "spearman")
-
-lmmm <- lm(Temp3pm ~ Temp9am, data = temp_9_3_winter)
-summary(lmmm)$r.squared 
-
-write.csv(df_temp_summer,"/Users/jason/Documents/GitHub/STAT440/df_temp_summer.csv", row.names = FALSE)
+# df_temp_9_3 <- df %>% select(c(1:2,20:21))
+# df_temp_9_3_winter <- df_temp_9_3 %>% 
+#   filter(month(as.Date(Date)) >= 6 & month(as.Date(Date)) <= 8)
+# temp_9_3_winter <- df_temp_9_3_winter %>% filter(Location == "Albury" & year(as.Date(Date)) == 2016)
+# cor(temp_9_3_winter$Temp9am, temp_9_3_winter$Temp3pm, method = "spearman")
+# 
+# lmmm <- lm(Temp3pm ~ Temp9am, data = temp_9_3_winter)
+# summary(lmmm)$r.squared 
+# 
+# write.csv(df_temp_summer,"/Users/jason/Documents/GitHub/STAT440/df_temp_summer.csv", row.names = FALSE)
 ```
 
 
